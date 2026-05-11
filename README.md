@@ -58,6 +58,34 @@ This project directly demonstrates those scenarios using controlled failure inje
 - Demo providers: mock OpenAI, mock Claude, local fallback
 - Resilience patterns: retry, circuit breaker, health checks, checkpoint/resume
 
+## Local Development
+
+Install dependencies:
+
+```bash
+python3 -m pip install --user --break-system-packages -r requirements.txt
+```
+
+Run tests:
+
+```bash
+python3 -m pytest tests/ -q
+```
+
+Start the API:
+
+```bash
+python3 -m uvicorn backend.app.main:app --reload --host 127.0.0.1 --port 8000
+```
+
+Key endpoints:
+
+- `GET /health`
+- `GET /providers`
+- `POST /failure-mode` with `{ "mode": "timeout" }`
+- `POST /run-demo` with `{ "task": "Summarize resilience" }`
+- `GET /trace`
+
 ## Repository Structure
 
 ```text
